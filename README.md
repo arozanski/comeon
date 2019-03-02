@@ -1,6 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a solution for candidate assigment.
 
-## Available Scripts
+## How to:
 
 In the project directory, you can run:
 

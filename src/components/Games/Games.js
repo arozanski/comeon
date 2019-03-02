@@ -1,32 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
+import Aux from '../../hoc/Aux';
+import Game from './Game/Game';
+import axios from '../../axios-instance';
+import Loader from '../UI/Loader/Loader';
 
-const games = () => (
-    <div>
-    <h3 className="ui dividing header">Games</h3>
+class Games extends Component {
+    constructor() {
+        super();
+        
+        this.state = {
+            games : []
+        }
+    }
 
-                      <div className="ui relaxed divided game items links">
+    componentDidMount () {
+        axios.get('/games')
+            .then(response => this.setState({games: response.data}))
+            .catch(error => console.log(error));
+    }
 
-                          {/*<!-- game item template -->*/}
-                          <div className="game item">
-                              <div className="ui small image">
-                                  <img src="" alt="game-icon"/>
-                              </div>
-                              <div className="content">
-                                  <div className="header"><b className="name"></b></div>
-                                  <div className="description">
-                                  </div>
-                                  <div className="extra">
-                                      <div className="play ui right floated secondary button inverted">
-                                          Play
-                                          <i className="right chevron icon"></i>
-                                      </div>
+    render () {
+        return (
+            <Aux>
+                <h3 className="ui dividing header">Games</h3>
+                <div className="ui relaxed divided game items links">
+                    {this.state.games.length > 0 ? 
+                        this.state.games.map(game => (<Game key={game.code} gameInfo={game} />)): 
+                            <Loader/>}
+                </div>
+            </Aux>
+        );
+    }
+}
 
-                                  </div>
-                              </div>
-                          </div>
-                          {/*<!-- end game item template -->*/}
-    </div>
-    </div>
-);
-
-export default games;
+export default Games;

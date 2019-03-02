@@ -93,7 +93,7 @@ class Login extends Component {
         axios.post('/login', formData)
             .then(response => {
                 this.displayInvalidAttempt(false);
-                this.props.onLogin(true, response.data.player);
+                this.props.onLogin(true, response.data.player, formData.username);
                 this.props.history.push('/main');
             })
             .catch(error => {
@@ -165,7 +165,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (status, player) => dispatch({type: actionTypes.AUTH, status, player})
+        onLogin: (status, player, username) => dispatch({type: actionTypes.AUTH, status, player, username})
     }
 }
 

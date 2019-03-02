@@ -1,21 +1,17 @@
 import React from 'react';
-import styles from './Input.module.css';
 
 const input = (props) => {
     let inputElement = null;
-    const inputClasses = [props.classes];
+    const inputClasses = ['ui', 'icon', 'input'];
 
     if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push(styles.Invalid)
+        inputClasses.push('error');
     }
 
     switch (props.elementType) {
         case ('input'):
         default:
-            inputElement = <input className={inputClasses.join(' ')} 
-                                {...props.elementConfig} 
-                                value={props.value}
-                                onChange={props.change} />;
+            inputElement = <input {...props.elementConfig} value={props.value} onChange={props.change} />;
     }
 
     let wrapperClasses = ['field'];
@@ -26,7 +22,7 @@ const input = (props) => {
 
     return (
         <div className={wrapperClasses}>
-            <div className="ui icon input">
+            <div className={inputClasses.join(' ')}>
                 {inputElement}
                 {props.children}
             </div>

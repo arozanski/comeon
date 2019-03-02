@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Input from '../UI/Input/Input';
-import Icon from '../UI/Icon/Icon';
+import Input from '../../components/UI/Input/Input';
+import Icon from '../../components/UI/Icon/Icon';
 import axios from '../../axios-instance';
 import {connect} from 'react-redux';
 import * as actionTypes from '../../store/actions';
@@ -93,8 +93,8 @@ class Login extends Component {
         axios.post('/login', formData)
             .then(response => {
                 this.displayInvalidAttempt(false);
-                this.props.onLogin(true);
-                this.props.history.push('/games');
+                this.props.onLogin(true, response.data.player);
+                this.props.history.push('/main');
             })
             .catch(error => {
                 this.displayInvalidAttempt(true);
@@ -165,7 +165,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogin: (status) => dispatch({type: actionTypes.AUTH, status: status})
+        onLogin: (status, player) => dispatch({type: actionTypes.AUTH, status, player})
     }
 }
 

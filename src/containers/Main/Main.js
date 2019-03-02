@@ -3,6 +3,7 @@ import Games from '../../components/Games/Games';
 import Player from '../../components/Player/Player';
 import Logout from '../../components/Logout/Logout';
 import Search from '../../components/Search/Search';
+import Categories from '../../components/Categories/Categories';
 import {connect} from 'react-redux';
 import axios from '../../axios-instance';
 import * as actionTypes from '../../store/actions';
@@ -15,13 +16,14 @@ class Main extends Component {
         this.state = {
             games: [],
             gamesSearched: [],
+            categories: [],
             searched: false
         }
     }
 
     onLogoutHandler = () => {
         axios.post('/logout', {username: this.props.playerInfo.username})
-            .then(response => {
+            .then(() => {
                 this.props.history.replace('/');
                 this.props.onLogin(false);
             })
@@ -31,6 +33,10 @@ class Main extends Component {
     componentDidMount () {
         axios.get('/games')
             .then(response => this.setState({games: response.data}))
+            .catch(error => console.log(error));
+
+        axios.get('/categories')
+            .then(response => this.setState({categories: response.data}))
             .catch(error => console.log(error));
     }
 
@@ -42,6 +48,10 @@ class Main extends Component {
             .map((game) => updatedGames.push(game));
 
         this.setState({gamesSearched: updatedGames, searched: true});
+    }
+
+    onCategoryFilterHandler = (categoryId) => {
+        console.log(categoryId);
     }
 
     render () {
@@ -65,7 +75,7 @@ class Main extends Component {
                         <Games games={games}/>
                     </div>
                     <div className="four wide column">
-                        categories
+                        <Categories categories={this.state.categories} onCategoryFilterHandler={this.onCategoryFilterHandler}/>
                     </div>
                 </div>
             </div>

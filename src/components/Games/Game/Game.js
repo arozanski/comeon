@@ -1,14 +1,12 @@
 import React from 'react';
+import Image from '../../UI/Image/Image';
 
 const game = (props) => {
-    const urlPartial = 'game-icon/';
-    const imageName = props.gameInfo.icon.split('/');
-    const imageUrl = urlPartial + imageName.pop();
     console.log(props.gameInfo)
     return (
         <div className="game item">
             <div className="ui small image">
-                <img src={process.env.PUBLIC_URL + imageUrl} alt="game-icon"/>
+                <Image relativePath="game-icon" altText="Game Icon" url={props.gameInfo.icon}/>
             </div>
             <div className="content">
                 <div className="header"><b className="name">{props.gameInfo.name}</b></div>

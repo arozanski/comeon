@@ -51,7 +51,19 @@ class Main extends Component {
     }
 
     onCategoryFilterHandler = (categoryId) => {
-        console.log(categoryId);
+        let searchedGames = [...this.state.games];
+        let filteredGames = [];
+
+        this.setState({searched: true});
+
+        if (categoryId !== 0) {
+            this.state.games.filter(game => {
+                return game.categoryIds.indexOf(categoryId) > -1
+                
+            }).map((game) => filteredGames.push(game));
+        }
+
+        this.setState({gamesSearched: filteredGames.length > 0 ? filteredGames: searchedGames});
     }
 
     onPlayClickHandler = (gameCode) => {

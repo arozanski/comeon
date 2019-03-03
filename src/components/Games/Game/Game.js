@@ -13,7 +13,8 @@ const game = (props) => {
                     {props.gameInfo.description}
                 </div>
                 <div className="extra">
-                    <div className="play ui right floated secondary button inverted">
+                    <div className="play ui right floated secondary button inverted"
+                        onClick={() => props.onPlayClickHandler(props.gameInfo.code)}>
                         Play
                         <i className="right chevron icon"></i>
                     </div>

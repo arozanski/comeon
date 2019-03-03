@@ -41,7 +41,7 @@ class Main extends Component {
     }
 
     onSearchHandler = (e) => {
-        const searchString = e.target.value;
+        const searchString = e.target.value.trim();
         const updatedGames = [];
 
         this.state.games.filter(game => e.target.value === '' || game.name.includes(searchString))
@@ -52,6 +52,10 @@ class Main extends Component {
 
     onCategoryFilterHandler = (categoryId) => {
         console.log(categoryId);
+    }
+
+    onPlayClickHandler = (gameCode) => {
+        this.props.history.push('/ingame/'+ gameCode);
     }
 
     render () {
@@ -72,7 +76,7 @@ class Main extends Component {
                 </div>
                 <div className="ui grid">
                     <div className="twelve wide column">
-                        <Games games={games}/>
+                        <Games games={games} onPlayClickHandler={this.onPlayClickHandler}/>
                     </div>
                     <div className="four wide column">
                         <Categories categories={this.state.categories} onCategoryFilterHandler={this.onCategoryFilterHandler}/>

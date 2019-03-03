@@ -1,0 +1,12 @@
+.NotFound {
+    text-align: center;
+}
+
+.NotFound img {
+    display: block;
+    margin: 20px auto;
+}
+
+.NotFound a {
+    font-size: 2rem;
+}

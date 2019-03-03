@@ -7,6 +7,7 @@ import Layout from './components/Layout/Layout';
 import Main from './containers/Main/Main';
 import Login from './containers/Login/Login';
 import InGame from './components/InGame/Ingame';
+import PrivateRoute from './hoc/PrivateRoute';
 
 class App extends Component {
   render () {
@@ -15,8 +16,8 @@ class App extends Component {
             <Layout>
                 <Switch>
                     <Route path="/" exact component={Login} />
-                    <Route path="/main" exact component={Main} />
-                    <Route path="/ingame/:game" exact component={InGame} />
+                    <PrivateRoute path="/main" exact component={Main} />
+                    <PrivateRoute path="/ingame/:game" exact component={InGame} />
                 </Switch>
             </Layout>
         </Aux>

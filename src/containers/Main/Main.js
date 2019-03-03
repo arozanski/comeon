@@ -41,10 +41,10 @@ class Main extends Component {
     }
 
     onSearchHandler = (e) => {
-        const searchString = e.target.value.trim();
+        const searchString = e.target.value.trim().toLowerCase();
         const updatedGames = [];
 
-        this.state.games.filter(game => e.target.value === '' || game.name.includes(searchString))
+        this.state.games.filter(game => e.target.value === '' || ((game.name.toLowerCase()).includes(searchString)))
             .map((game) => updatedGames.push(game));
 
         this.setState({gamesSearched: updatedGames, searched: true});
